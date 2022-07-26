@@ -1,5 +1,6 @@
 package com.melanie.springbootmall.service.implement;
 
+import com.melanie.springbootmall.constant.ProductCategory;
 import com.melanie.springbootmall.dao.ProductDao;
 import com.melanie.springbootmall.dto.ProductRequest;
 import com.melanie.springbootmall.model.Product;
@@ -13,8 +14,8 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     @Override
-    public List<Product> getProducts() {
-        return productDao.getProducts();
+    public List<Product> getProducts(ProductCategory category,String search) {
+        return productDao.getProducts(category,search);
     }
 
     @Autowired
