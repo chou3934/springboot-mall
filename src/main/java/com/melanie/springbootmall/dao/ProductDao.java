@@ -1,6 +1,7 @@
 package com.melanie.springbootmall.dao;
 
 import com.melanie.springbootmall.constant.ProductCategory;
+import com.melanie.springbootmall.dto.ProductQueryParams;
 import com.melanie.springbootmall.dto.ProductRequest;
 import com.melanie.springbootmall.model.Product;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 public interface ProductDao {
 
-    List<Product> getProducts(ProductCategory category,String search);
+    List<Product> getProducts(ProductQueryParams productQueryParams);
 
     Product getProductById(Integer productId);
 
