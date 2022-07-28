@@ -1,6 +1,8 @@
 package com.melanie.springbootmall.service.implement;
 
+import com.melanie.springbootmall.dao.UserDao;
 import com.melanie.springbootmall.dao.implement.UserDaoImpl;
+import com.melanie.springbootmall.dto.UserLoginRequest;
 import com.melanie.springbootmall.dto.UserRegisterRequest;
 import com.melanie.springbootmall.model.User;
 import com.melanie.springbootmall.service.UserService;
@@ -38,5 +40,23 @@ public class UserServiceImpl implements UserService {
 
         //創造
         return userDao.createUser(userRegisterRequest);
+    }
+
+
+    @Override
+    public User login(UserLoginRequest userLoginRequest) {
+        User user= userDao.getUserByEmail(userLoginRequest.getEmail());
+
+        if(user==null){
+            log.warn("該 email{} 尚未註冊",userLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        if(user.getPassword().equals(userLoginRequest.getPassword())){
+            return user;
+        }else{
+            log.warn("email{}  的密碼不正確",userLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
     }
 }
